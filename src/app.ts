@@ -8,7 +8,8 @@ import { setupSwagger } from "./config/swagger";
 
 // Routes
 import healthRoutes from "./routes/health.routes";
-
+import notificationRoutes from "./routes/notification.routes";
+import templateRoutes from "./routes/template.routes";
 const app: Application = express();
 
 /**
@@ -50,17 +51,12 @@ app.use("/health", healthRoutes);
 /**
  * Notification APIs
  */
-app.use("/api/v1/notifications", (_req, res) => {
-  res.json({
-    message: "Notification Route",
-  });
-});
+app.use("/api/v1/notifications", notificationRoutes);
 
-app.use("/api/v1/templates", (_req, res) => {
-  res.json({
-    message: "Template Route",
-  });
-});
+/**
+ * Template APIs
+ */
+app.use("/api/v1/templates", templateRoutes);
 
 /**
  * Swagger
