@@ -49,3 +49,8 @@ npm install express sequelize sequelize-cli pg pg-hstore ioredis amqplib bullmq 
 
 npm install -D typescript ts-node ts-node-dev @types/node @types/express @types/nodemailer @types/jsonwebtoken @types/cors @types/compression @types/morgan @types/swagger-ui-express jest ts-jest supertest @types/jest @types/supertest eslint prettier eslint-config-prettier
 
+# individual file Migration
+
+npx sequelize-cli migration:generate --name create-notifications
+npx sequelize-cli migration:generate --name create-notification-templates
+npx sequelize-cli migration:generate --name create-webhook-logs
