@@ -5,6 +5,8 @@ import app from "./app";
 import sequelize, {connectDatabase} from "./config/database";
 import redis from "./config/redis";
 import { connectRabbitMQ } from "./config/rabbitmq";
+import { verifyMailConnection } from "./config/mail";
+
 
 import { env } from "./config/env";
 
@@ -16,6 +18,11 @@ const startServer = async (): Promise<void> => {
      * PostgreSQL
      */
     await connectDatabase();
+
+    /**
+     * SMTP
+     */
+    await verifyMailConnection();
 
     /**
      * Redis
