@@ -10,16 +10,17 @@ import { setupSwagger } from "./config/swagger";
 import healthRoutes from "./routes/health.routes";
 import notificationRoutes from "./routes/notification.routes";
 import templateRoutes from "./routes/template.routes";
+
+import { errorHandler } from "./middlewares/error.middleware";
+
 const app: Application = express();
 
-/**
- * Security
- */
+
+// Security
 app.use(helmet());
 
-/**
- * CORS
- */
+
+// CORS
 app.use(
   cors({
     origin: "*",
@@ -27,45 +28,29 @@ app.use(
   })
 );
 
-/**
- * Body Parser
- */
+// Body Parser
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
-/**
- * Compression
- */
+// Compression
 app.use(compression());
 
-/**
- * Logging
- */
+// Logging
 app.use(morgan("dev"));
-
-/**
- * Health
- */
 app.use("/health", healthRoutes);
-
-/**
- * Notification APIs
- */
 app.use("/api/v1/notifications", notificationRoutes);
 
-/**
- * Template APIs
- */
+
+//Template APIs
 app.use("/api/v1/templates", templateRoutes);
 
-/**
- * Swagger
- */
+//Swagger
 setupSwagger(app);
 
-/**
- * 404
- */
+// Error Handling Middleware
+app.use(errorHandler);
+
+//404
 app.use((_req, res) => {
   res.status(404).json({
     success: false,
