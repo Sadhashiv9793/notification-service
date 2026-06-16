@@ -1,4 +1,4 @@
-import { Express } from "express";
+import { Application } from "express";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
@@ -9,44 +9,17 @@ const options: swaggerJsdoc.Options = {
     info: {
       title: "Notification Service API",
       version: "1.0.0",
-      description:
-        "Notification Service for Email, Webhooks and Event Processing",
+      description: "Notification Service API",
     },
-
-    servers: [
-      {
-        url: "http://localhost:5002/api/v1",
-        description: "Local Development",
-      },
-    ],
-
-    components: {
-      securitySchemes: {
-        bearerAuth: {
-          type: "http",
-          scheme: "bearer",
-          bearerFormat: "JWT",
-        },
-      },
-    },
-
-    security: [
-      {
-        bearerAuth: [],
-      },
-    ],
   },
 
-  apis: [
-    "./src/routes/*.ts",
-    "./src/controllers/*.ts",
-  ],
+  apis: ["./src/routes/*.ts"],
 };
 
 const specs = swaggerJsdoc(options);
 
 export const setupSwagger = (
-  app: Express
+  app: Application
 ): void => {
   app.use(
     "/api-docs",

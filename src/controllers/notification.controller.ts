@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import notificationService from "../services/notification.service";
+import { string } from "zod";
 
 export class NotificationController {
   async create(
@@ -24,7 +25,7 @@ export class NotificationController {
   ): Promise<void> {
     const notification =
       await notificationService.getNotification(
-        req.params.id
+        req.params.id as string
       );
 
     if (!notification) {
@@ -49,7 +50,7 @@ export class NotificationController {
   ): Promise<void> {
     const notifications =
       await notificationService.getUserNotifications(
-        req.params.userId
+        req.params.userId as string
       );
 
     res.status(200).json({
@@ -63,8 +64,8 @@ export class NotificationController {
     res: Response
   ): Promise<void> {
     await notificationService.updateStatus(
-      req.params.id,
-      req.body.status
+      req.params.id as string,
+      req.body.status as string
     );
 
     res.status(200).json({
@@ -86,9 +87,9 @@ export class NotificationController {
 
     const result =
       await notificationService.sendWelcomeEmail(
-        tenantId,
-        email,
-        userName
+        tenantId as string,
+        email as string,
+        userName as string
       );
 
     res.status(200).json({
