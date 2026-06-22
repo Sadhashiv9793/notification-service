@@ -38,19 +38,19 @@ class NotificationTemplate
   >
   implements NotificationTemplateAttributes
 {
-  public id!: string;
+  declare id: string;
 
-  public tenantId!: string | null;
+  declare tenantId: string | null;
 
-  public templateName!: string;
+  declare templateName: string;
 
-  public subject!: string;
+  declare subject: string;
 
-  public body!: string;
+  declare body: string;
 
-  public readonly createdAt!: Date;
+  declare readonly createdAt: Date;
 
-  public readonly updatedAt!: Date;
+  declare readonly updatedAt: Date;
 }
 
 NotificationTemplate.init(

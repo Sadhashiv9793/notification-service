@@ -44,25 +44,25 @@ class Notification
   >
   implements NotificationAttributes
 {
-  public id!: string;
+  declare id: string;
 
-  public tenantId!: string;
+  declare tenantId: string;
 
-  public userId!: string | null;
+  declare  userId: string | null;
 
-  public type!: string;
+  declare type: string;
 
-  public channel!: string;
+  declare  channel: string;
 
-  public status!: string;
+  declare status: string;
 
-  public subject!: string;
+  declare subject: string;
 
-  public content!: string;
+  declare content: string;
 
-  public readonly createdAt!: Date;
+  declare readonly createdAt: Date;
 
-  public readonly updatedAt!: Date;
+  declare readonly updatedAt: Date;
 }
 
 Notification.init(

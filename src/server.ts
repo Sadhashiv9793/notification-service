@@ -6,7 +6,7 @@ import sequelize, {connectDatabase} from "./config/database";
 import redis from "./config/redis";
 import { connectRabbitMQ } from "./config/rabbitmq";
 import { verifyMailConnection } from "./config/mail";
-
+import "./workers/notification.worker";
 
 import { env } from "./config/env";
 
@@ -51,9 +51,9 @@ const startServer = async (): Promise<void> => {
      * Development Only
      */
     if (env.NODE_ENV === "development") {
-      await sequelize.sync({
-        alter: false,
-      });
+      // await sequelize.sync({
+      //   alter: false,
+      // });
 
       console.log("✅ Database Synced");
     }

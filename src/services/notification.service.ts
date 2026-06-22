@@ -1,6 +1,5 @@
+import { notificationQueue } from "../queues/notification.queue";
 import notificationRepository from "../repositories/notification.repository";
-
-import emailService from "./email.service";
 
 import templateService from "./template.service";
 
@@ -15,18 +14,28 @@ export class NotificationService {
         tenantId,
         "welcome-email"
       );
+console.log("Template: ", template);
 
-    const html =
-      template.body.replace(
-        "{{name}}",
-        userName
-      );
 
-    await emailService.send(
-      email,
-      template.subject,
-      html
-    );
+const html = template.body.replace(
+  "{{name}}",
+  userName
+);
+
+    // await emailService.send(
+    //   email,
+    //   template.subject,
+    //   html
+    // );
+
+    await notificationQueue.add(
+  "send-email",
+  {
+    to: email,
+    subject: template.subject,
+    html,
+  }
+);
 
     return notificationRepository.create({
       tenantId,

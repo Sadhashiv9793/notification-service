@@ -41,21 +41,21 @@ class WebhookLog
   >
   implements WebhookLogAttributes
 {
-  public id!: string;
+  declare id: string;
 
-  public url!: string;
+  declare url: string;
 
-  public requestBody!: object;
+  declare requestBody: object;
 
-  public responseBody!: object | null;
+  declare responseBody: object | null;
 
-  public statusCode!: number | null;
+  declare statusCode: number | null;
 
-  public retryCount!: number;
+  declare retryCount: number;
 
-  public readonly createdAt!: Date;
+  declare readonly createdAt: Date;
 
-  public readonly updatedAt!: Date;
+  declare readonly updatedAt: Date;
 }
 
 WebhookLog.init(

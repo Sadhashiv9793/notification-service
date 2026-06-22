@@ -54,3 +54,32 @@ npm install -D typescript ts-node ts-node-dev @types/node @types/express @types/
 npx sequelize-cli migration:generate --name create-notifications
 npx sequelize-cli migration:generate --name create-notification-templates
 npx sequelize-cli migration:generate --name create-webhook-logs
+
+
+# npm install bullmq
+
+# for SMTP configuration 
+
+-> Enable the 2-Step Verification (Google Account -> Security, 2-Step Verification)
+-> Create App Name ex: "Notification Service"
+-> Google will generate something like: abcd efgh ijkl mnop 
+-> use this password in SMTP_PASS 
+
+# =========== Architecture =============
+
+Identity Service
+        │
+        ▼
+     RabbitMQ
+        │
+        ▼
+Notification Service
+        │
+        ▼
+      BullMQ
+        │
+        ▼
+      Redis
+        │
+        ▼
+     Email
